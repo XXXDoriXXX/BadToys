@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadToysк</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>BadToys</h1>
+    <input type="text" id="search" placeholder="Пошук за назвою або брендом" onkeyup="filterToys()">
+    <button onclick="viewCart()">🛒 Корзина</button>
+
+</header>
+
+<aside class="filter">
+    <h3>Фільтр за віком</h3>
+    <select id="ageFilter" onchange="filterToys()">
+        <option value="all">Усі</option>
+        <option value="0-3">0-3 роки</option>
+        <option value="4-7">4-7 років</option>
+        <option value="8+">8+ років</option>
+    </select>
+</aside>
+
+<main id="toyList"></main>
+
+<div id="cartModal" class="cardModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Корзина</h2>
+        <div class="cart-content" id="cartItems"></div>
+        <div class="cart-footer">
+            <p>Загальна сума: <span id="totalPrice">0</span> грн</p>
+            <button onclick="checkout()">Оформити замовлення</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

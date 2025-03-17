@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadToys</title>
+    <h1>BadToys</h1>
+    <input type="text" id="search" placeholder="Пошук за назвою або брендом" onkeyup="filterToys()">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="toyList"></main>
+<div class="addToy">
+    <button onclick="openAddCart()">
+        +
+    </button>
+</div >
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddCart()">&times;</span>
+        <h2>Додати товар</h2>
+        <form id="addToyForm">
+            <div class="inputBox">
+            <input type="text" placeholder="Назва іграшки">
+            <input type="text" placeholder="Виробник">
+            <input type="text" placeholder="Категорія">
+            <input type="text" placeholder="Ціна">
+            </div>
+            <button>Додати товар</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
