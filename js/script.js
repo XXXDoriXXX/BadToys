@@ -19,7 +19,25 @@ function renderToys(toys = toyData) {
         toyList.appendChild(div);
     });
 }
+function renderToysAdmin(toys = toyData) {
+    let toyList = document.getElementById("toyList");
 
+    toys.forEach(toy => {
+        let div = document.createElement("div");
+        div.className = "toy";
+        div.innerHTML = `
+            <img src="${toy.image}" alt="${toy.name}" onclick="openProductPage(${toy.id})">
+            <h3 onclick="openProductPage(${toy.id})">${toy.name}</h3>
+            <p>Бренд: ${toy.brand}</p>
+            <p>Вік: ${toy.age}</p>
+            <p class="price">Ціна: ${toy.price} грн</p>
+            <button onclick="addToCart(${toy.id})">
+                <img src="images/edit.svg" alt="Cart Icon">
+            </button>
+        `;
+        toyList.appendChild(div);
+    });
+}
 function filterToys() {
     let age = document.getElementById("ageFilter").value;
     let search = document.getElementById("search").value.toLowerCase();
@@ -91,8 +109,8 @@ function checkout() {
     closeCart();
 }
 
-renderToys();
-
+//renderToys();
+renderToysAdmin()
 
 function openProductPage(id) {
     window.location.href = `product.html?id=${id}`;
@@ -107,6 +125,6 @@ function closeAddCart(){
 function openAddCart(){
     let modal = document.getElementById("addModal");
     modal.style.display = "flex";
-    madal.style.opacity = 1;
+    modal.style.position = "center";
     modal.classList.remove("close-animation");
 }
