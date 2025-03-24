@@ -1,5 +1,13 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+document.addEventListener("DOMContentLoaded", () => {
+    let storedToys = localStorage.getItem("toyData");
+    if (storedToys) {
+        toyData = JSON.parse(storedToys);
+        renderToys(toys = toyData)
+    } else {
+        localStorage.setItem("toyData", JSON.stringify(toyData));
+    }
+});
 function renderToys(toys = toyData) {
     let toyList = document.getElementById("toyList");
     toyList.innerHTML = "";
@@ -12,32 +20,14 @@ function renderToys(toys = toyData) {
             <p>Бренд: ${toy.brand}</p>
             <p>Вік: ${toy.age}</p>
             <p class="price">Ціна: ${toy.price} грн</p>
-            <button onclick="addToCart(${toy.id})">
-                <img src="images/cart-arrow.svg" alt="Cart Icon">
+            <button onclick="addToCart(${toy.id}, this)">
+                <img src="images/cart_down.svg" alt="Cart Icon">
             </button>
         `;
         toyList.appendChild(div);
     });
 }
-function renderToysAdmin(toys = toyData) {
-    let toyList = document.getElementById("toyList");
 
-    toys.forEach(toy => {
-        let div = document.createElement("div");
-        div.className = "toy";
-        div.innerHTML = `
-            <img src="${toy.image}" alt="${toy.name}" onclick="openProductPage(${toy.id})">
-            <h3 onclick="openProductPage(${toy.id})">${toy.name}</h3>
-            <p>Бренд: ${toy.brand}</p>
-            <p>Вік: ${toy.age}</p>
-            <p class="price">Ціна: ${toy.price} грн</p>
-            <button onclick="addToCart(${toy.id})">
-                <img src="images/edit.svg" alt="Cart Icon">
-            </button>
-        `;
-        toyList.appendChild(div);
-    });
-}
 function filterToys() {
     let age = document.getElementById("ageFilter").value;
     let search = document.getElementById("search").value.toLowerCase();
@@ -48,16 +38,25 @@ function filterToys() {
     renderToys(filtered);
 }
 
-function addToCart(id) {
+function addToCart(id, btn) {
+    console.log("Кнопка:", btn);
     if (window.location.pathname.includes("product.html")) {
-        console.log("Виклик з product.html");
         window.location.href = `index.html`;
+        return;
     }
     let toy = toyData.find(t => t.id === id);
     cart.push(toy);
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Товар додано!");
+
+    if (btn) {
+        let img = btn.querySelector("img");
+        if (img) {
+            img.src = "images/cart_up.svg";
+        }
+        btn.classList.add('active');
+    }
 }
+
 
 function viewCart() {
     let modal = document.getElementById("cartModal");
@@ -103,26 +102,39 @@ function checkout() {
         alert("Корзина пуста!");
         return;
     }
-    alert("Замовлення оформлено!");
+
+    const name = prompt("Ваше ім'я:");
+    const address = prompt("Адреса доставки:");
+
+    if (!name || !address) {
+        alert("Дані не заповнені!");
+        return;
+    }
+
+    let summary = `Замовлення оформлено!\nІм'я: ${name}\nАдреса: ${address}\n`;
+    cart.forEach(item => summary += `\n- ${item.name} — ${item.price} грн`);
+    summary += `\n\nЗагальна сума: ${cart.reduce((sum, item) => sum + item.price, 0)} грн`;
+
+    alert(summary);
     cart = [];
     localStorage.setItem("cart", JSON.stringify(cart));
     closeCart();
 }
 
-//renderToys();
-renderToysAdmin()
 
 function openProductPage(id) {
     window.location.href = `product.html?id=${id}`;
 }
-function closeAddCart(){
+
+function closeAddCart() {
     let modal = document.getElementById("addModal");
     modal.classList.add("close-animation");
     setTimeout(() => {
         modal.style.display = "none";
     }, 500);
 }
-function openAddCart(){
+
+function openAddCart() {
     let modal = document.getElementById("addModal");
     modal.style.display = "flex";
     modal.style.position = "center";

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <title>Вхід</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="product-card">
+    <h2>Авторизація адміністратора</h2>
+    <input type="password" id="adminPass" placeholder="Введіть пароль" />
+    <button onclick="login()">Увійти</button>
+</div>
+
+<script>
+    function login() {
+        const pass = document.getElementById("adminPass").value.trim();
+        if (pass === "admin123") {
+            document.cookie = "admin=1";
+            window.location.href = "admin.html";
+        } else {
+            alert("Неправильний пароль");
+        }
+    }
+</script>
+</body>
+</html>
