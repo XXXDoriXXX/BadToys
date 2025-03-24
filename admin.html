@@ -3,37 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BadToys</title>
-    <h1>BadToys</h1>
-    <input type="text" id="search" placeholder="Пошук за назвою або брендом" onkeyup="filterToys()">
+    <title>BadToys - Адмін панель</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header>
+    <h1>BadToys - Адмін панель</h1>
+    <input type="text" id="search" placeholder="Пошук за назвою або брендом" onkeyup="filterToysAdmin()">
+
+</header>
+<aside class="filter">
+
+</aside>
 <div id="addModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeAddCart()">&times;</span>
+        <span class="close" onclick="closeAddModal()">&times;</span>
         <h2>Додати товар</h2>
         <form id="addToyForm">
-            <img src="images/default.jpeg" alt="no image" id="addToyImage">
+            <input type="file" id="imageInput" accept="image/*" style="display:none">
+            <img src="images/default.jpeg" alt="no image" id="addToyImage" onclick="document.getElementById('imageInput').click()">
             <div class="inputBox">
-                <input type="text" placeholder="Назва іграшки">
-                <input type="text" placeholder="Виробник">
-                <input type="text" placeholder="Категорія">
-                <input type="text" placeholder="Ціна">
+                <input type="text" name="name" placeholder="Назва іграшки" required>
+                <input type="text" name="brand" placeholder="Виробник" required>
+                <input type="text" name="age" placeholder="Категорія" required>
+                <input type="number" name="price" placeholder="Ціна" required>
             </div>
-            <button>Додати товар</button>
+            <button type="submit">Додати товар</button>
         </form>
     </div>
 </div>
 <main id="toyList" class="toyListArea">
-<div class="addToy">
-    <button onclick="openAddCart()">
-        +
-    </button>
-</div >
+    <div class="addToy">
+        <button onclick="openAddModal()">+</button>
+    </div>
 </main>
 
 <script src="js/data.js"></script>
-<script src="js/script.js"></script>
+<script src="js/admin.js"></script>
 </body>
 </html>

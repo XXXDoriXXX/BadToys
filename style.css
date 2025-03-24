@@ -10,7 +10,7 @@ body {
 header {
     background: rgba(255, 255, 255, 0.2);
     padding: 15px;
-margin-top: -200px;
+    top:0;
     position: fixed;
     width: 100%;
     z-index: 1000;
@@ -133,6 +133,14 @@ main {
     margin: 10px auto;
     margin-top: -86px;
 }
+.toy button.active {    background: linear-gradient(135deg, #bd3d3d, #7d1b1b);
+
+}
+.toy button.active:hover {
+    background: linear-gradient(135deg, #aa4747, #d64747);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 .toy button img {
     width: 50px;
     height: 50px;
@@ -223,7 +231,12 @@ main {
     object-fit: cover;
     border-radius: 8px;
 }
-
+#addToyImage{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 8px;
+}
 .cart-item button {
     background: none;
     border: none;
@@ -260,7 +273,7 @@ main {
     top: 15px;
     right: 15px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 42px;
     color: #ff4757;
     transition: transform 0.2s ease-in-out;
 }
@@ -347,20 +360,25 @@ main {
 }
 .modal{
     margin: 0 auto;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    align-items: center;
     border-radius: 32px;
     opacity: 0;
     display: none;
     position: fixed;
-    top: 0;
     z-index: 10000;
     width: 420px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
     padding: 25px;
-    animation: slideInRight 0.5s ease-in-out forwards;
+    animation: modalFadeIn 0.4s ease-out forwards;
 }
+.modal.modal-close {
+    animation: modalFadeOut 0.4s ease-in forwards;
+}
+
 .modal input{
     width: 90%;
     background: rgba(225, 225, 225, 0.95);
@@ -377,12 +395,59 @@ main {
     height: 100%;
 }
 .toyListArea{
-    justify-content: start;
     display: flex;
+    top:100px;
+    justify-content: start;
     margin: 0 auto;
     border-radius: 32px;
     min-height: 900px;
     height: 90%;
     width: 95%;
     background: rgba(237, 237, 237, 0.9);
+}
+@media (max-width: 768px) {
+    main, .toyListArea {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .toy, .addToy {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .product-card {
+        width: 90%;
+    }
+
+    #search {
+        width: 90%;
+    }
+
+    .cardModal {
+        width: 100%;
+        right: 0;
+        border-radius: 0;
+    }
+}
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -55%) scale(0.9);
+    }
 }
