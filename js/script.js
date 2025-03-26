@@ -126,17 +126,3 @@ function openProductPage(id) {
     window.location.href = `product.html?id=${id}`;
 }
 
-function closeAddCart() {
-    let modal = document.getElementById("addModal");
-    modal.classList.add("close-animation");
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 500);
-}
-
-function openAddCart() {
-    let modal = document.getElementById("addModal");
-    modal.style.display = "flex";
-    modal.style.position = "center";
-    modal.classList.remove("close-animation");
-}

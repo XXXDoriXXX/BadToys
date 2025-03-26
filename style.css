@@ -102,6 +102,15 @@ main {
     font-size: 22px;
     margin-bottom: 5px;
 }
+#productDetails{
+    display: flex;
+    margin: 15% auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 .product-card .price, .toy .price {
     font-size: 22px;
     font-weight: bold;
@@ -425,7 +434,7 @@ main {
     }
 
     .cardModal {
-        width: 100%;
+        width: 60%;
         right: 0;
         border-radius: 0;
     }

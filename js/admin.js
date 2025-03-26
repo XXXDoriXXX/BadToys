@@ -7,12 +7,6 @@ if (!document.cookie.includes("admin=1")) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    let storedToys = localStorage.getItem("toyData");
-    if (storedToys) {
-        toyData = JSON.parse(storedToys);
-    } else {
-        localStorage.setItem("toyData", JSON.stringify(toyData));
-    }
     renderToysAdmin();
 
     document.getElementById("addToyForm").addEventListener("submit", function(e) {
